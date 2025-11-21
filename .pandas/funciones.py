@@ -29,3 +29,19 @@ def desviacion(nombre_archivo, nombre_columna):
     except FileNotFoundError:
         print("No se encontró el archivo.")
         return None
+    
+def percentil(na, nc):
+    try:
+        df = pd.read_csv(na)
+
+        if nc not in df.columns:
+            return "Error al procesar la columna"
+
+        p25 = df[nc].quantile(0.25)
+        p50 = df[nc].quantile(0.50)
+        p75 = df[nc].quantile(0.75)
+
+        return p25, p50, p75
+
+    except Exception as e:
+        return f"Error al procesar la columna"
